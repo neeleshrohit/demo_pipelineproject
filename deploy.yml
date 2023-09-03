@@ -1,0 +1,18 @@
+---
+- hosts: your_server
+  become: yes
+  tasks:
+    - name: Copy Docker Compose File
+      copy:
+        src: /path/to/docker-compose.yml
+        dest: /path/on/server/docker-compose.yml
+
+    - name: Pull Docker Image
+      docker_image:
+        name: my-react-app
+        source: pull
+
+    - name: Start Docker Containers
+      docker_compose:
+        project_src: /path/on/server
+        state: present
